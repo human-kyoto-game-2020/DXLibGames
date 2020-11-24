@@ -31,6 +31,9 @@
     <ClCompile Include="src\Manager\SceneManager.cpp">
       <Filter>Source Files\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="src\Manager\GameManager.cpp">
+      <Filter>Source Files\Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Scene\SceneBase.h">
@@ -50,6 +53,9 @@
     </ClInclude>
     <ClInclude Include="src\Definition.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Manager\GameManager.h">
+      <Filter>Source Files\Manager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

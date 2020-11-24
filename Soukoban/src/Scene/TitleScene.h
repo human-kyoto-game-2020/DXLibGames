@@ -15,6 +15,7 @@ public:
 	virtual void Exec();	// 処理を行う
 	virtual void Draw();	// 描画を行う
 
+	virtual bool IsEnd() const;	// シーンが終了したかどうかを返す
 };
 
 #endif // #ifndef TITLE_SCENE_H

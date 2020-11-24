@@ -15,6 +15,12 @@ public:
 	virtual void Draw() = 0;	// 描画を行う
 
 	virtual bool IsEnd() const;	// シーンが終了したかどうかを返す
+
+protected:
+	void set_Step( int step_ );	// 処理内容の切り替え
+
+protected:
+	int		m_Step;		// 処理内容を管理する変数
 };
 
 #endif // #ifndef SCENE_BASE_H
