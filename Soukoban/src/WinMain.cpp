@@ -1,4 +1,5 @@
 ﻿#include "DxLib.h"
+#include "Manager/SceneManager.h"
 
 // プログラムは WinMain から始まります
 // 警告C28251を回避するためにWinMainの引数に注釈を追記
@@ -19,6 +20,9 @@ int WINAPI WinMain(_In_     HINSTANCE hInstance,
 	// 描画先を裏の画面に設定
 	SetDrawScreen(DX_SCREEN_BACK);
 
+	// ゲームを始める前の初期化処理
+	SceneManager* pSceneMng = new SceneManager();
+
 	// ゲームループ
 	while( true )
 	{
@@ -29,12 +33,19 @@ int WINAPI WinMain(_In_     HINSTANCE hInstance,
 		ClearDrawScreen();
 		clsDx();
 
-		// 点を打つ
-		DrawPixel( 320, 240, GetColor( 255,255,255 ) );
+		// 処理
+		pSceneMng->Exec();
+
+		// 表示
+		pSceneMng->Draw();
 
 		// DxLibのお約束：画面更新
 		ScreenFlip();
 	}
+
+	// ゲーム終了前の後始末
+	delete pSceneMng;
+	pSceneMng = nullptr;
 
 	// ＤＸライブラリ使用の終了処理
 	DxLib_End();

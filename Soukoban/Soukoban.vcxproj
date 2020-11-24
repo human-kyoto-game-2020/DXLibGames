@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Manager\SceneManager.cpp" />
     <ClCompile Include="src\Scene\InGameScene.cpp" />
     <ClCompile Include="src\Scene\ResultScene.cpp" />
     <ClCompile Include="src\Scene\SceneBase.cpp" />
@@ -158,6 +159,8 @@
     <ClCompile Include="src\WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Definition.h" />
+    <ClInclude Include="src\Manager\SceneManager.h" />
     <ClInclude Include="src\Scene\InGameScene.h" />
     <ClInclude Include="src\Scene\ResultScene.h" />
     <ClInclude Include="src\Scene\SceneBase.h" />
