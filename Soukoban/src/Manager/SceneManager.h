@@ -8,9 +8,6 @@
 class SceneManager
 {
 public:
-	SceneManager();
-	~SceneManager();
-
 	void Exec();	// シーンの実行
 	void Draw();	// シーンの描画
 
@@ -23,6 +20,25 @@ private:
 	class SceneBase*	m_pScene;		// 実行中のシーン
 	static SceneID 		m_NextSceneID;	// 次に作るシーンのID
 
+//------------------------------------------------------------
+// シングルトンデザイン
+public:
+	// staticなm_pInstanceへのアクセス用関数群
+	// 実体を作る関数
+	static void CreateInstance();
+	// 実体を破棄する関数
+	static void DestroyInstance();
+	// 実体があるかを確認する関数
+	static bool IsNull();
+	// 実体を取得する関数
+	static SceneManager* GetInstance();
+
+private:
+	SceneManager();
+	~SceneManager();
+
+private:
+	static SceneManager* m_pInstance;
 };
 
 #endif	// #ifndef SCENE_MANAGER_H

@@ -9,20 +9,6 @@
 // staticなメンバ変数を初期化
 SceneID SceneManager::m_NextSceneID = SceneID_Invalid;
 
-SceneManager::SceneManager()
-	: m_pScene( nullptr )
-{
-	// 最初に実行するシーンを作成する
-	SetNextScene( SceneID_Title );
-	m_pScene = create_NextScene();
-}
-
-SceneManager::~SceneManager()
-{
-	delete m_pScene;
-	m_pScene = nullptr;
-}
-
 void SceneManager::Exec()
 {
 	if( m_pScene == nullptr ){ return; }
@@ -61,3 +47,48 @@ SceneBase* SceneManager::create_NextScene()
 	}
 	return next;
 }
+
+//------------------------------------------------------------
+// シングルトンデザイン
+SceneManager* SceneManager::m_pInstance = nullptr;
+
+// 実体を作る関数
+void SceneManager::CreateInstance()
+{
+	// nullチェックをして、２回以上作られるのを防止
+	if( m_pInstance == nullptr )
+	{
+		m_pInstance = new SceneManager();
+	}
+}
+// 実体を破棄する関数
+void SceneManager::DestroyInstance()
+{
+	delete m_pInstance;
+	m_pInstance = nullptr;
+}
+// 実体があるかを確認する関数
+bool SceneManager::IsNull()
+{
+	return (m_pInstance == nullptr);
+}
+// 実体を取得する関数
+SceneManager* SceneManager::GetInstance()
+{
+	return m_pInstance;
+}
+
+SceneManager::SceneManager()
+	: m_pScene( nullptr )
+{
+	// 最初に実行するシーンを作成する
+	SetNextScene( SceneID_Title );
+	m_pScene = create_NextScene();
+}
+
+SceneManager::~SceneManager()
+{
+	delete m_pScene;
+	m_pScene = nullptr;
+}
+

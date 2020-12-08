@@ -1,5 +1,7 @@
 ﻿#include "DxLib.h"
 #include "Manager/SceneManager.h"
+#include "Manager/GameManager.h"
+#include "Manager/InputManager.h"
 
 // プログラムは WinMain から始まります
 // 警告C28251を回避するためにWinMainの引数に注釈を追記
@@ -21,7 +23,9 @@ int WINAPI WinMain(_In_     HINSTANCE hInstance,
 	SetDrawScreen(DX_SCREEN_BACK);
 
 	// ゲームを始める前の初期化処理
-	SceneManager* pSceneMng = new SceneManager();
+	GameManager::CreateInstance();
+	InputManager::CreateInstance();
+	SceneManager::CreateInstance();
 
 	// ゲームループ
 	while( true )
@@ -33,7 +37,12 @@ int WINAPI WinMain(_In_     HINSTANCE hInstance,
 		ClearDrawScreen();
 		clsDx();
 
+		// シングルトンの実体を取得
+		InputManager* pInputMng = InputManager::GetInstance();
+		SceneManager* pSceneMng = SceneManager::GetInstance();
+
 		// 処理
+		pInputMng->Update();
 		pSceneMng->Exec();
 
 		// 表示
@@ -44,8 +53,10 @@ int WINAPI WinMain(_In_     HINSTANCE hInstance,
 	}
 
 	// ゲーム終了前の後始末
-	delete pSceneMng;
-	pSceneMng = nullptr;
+	// シングルトンに限らず、作った順番と逆順で破棄する
+	SceneManager::DestroyInstance();
+	InputManager::DestroyInstance();
+	GameManager::DestroyInstance();
 
 	// ＤＸライブラリ使用の終了処理
 	DxLib_End();
